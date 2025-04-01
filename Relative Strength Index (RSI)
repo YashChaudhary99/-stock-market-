@@ -1,0 +1,19 @@
+import numpy as np
+
+# Calculate Bollinger Bands (20-day moving average ± 2 standard deviations)
+df['MA_20'] = df['Close'].rolling(window=20).mean()
+df['STD_20'] = df['Close'].rolling(window=20).std()
+df['Upper_Band'] = df['MA_20'] + (2 * df['STD_20'])
+df['Lower_Band'] = df['MA_20'] - (2 * df['STD_20'])
+
+# Plot Bollinger Bands
+plt.figure(figsize=(12, 6))
+plt.plot(df['Date'], df['Close'], label='Closing Price', color='blue', linewidth=1.5)
+plt.plot(df['Date'], df['MA_20'], label='20-Day MA', color='orange', linestyle='dashed', linewidth=2)
+plt.fill_between(df['Date'], df['Upper_Band'], df['Lower_Band'], color='gray', alpha=0.2, label='Bollinger Bands')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.title('Stock Closing Price with Bollinger Bands')
+plt.legend()
+plt.grid(True)
+plt.show()
