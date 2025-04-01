@@ -1,0 +1,15 @@
+# Calculate moving averages
+df['MA_10'] = df['Close'].rolling(window=10).mean()
+df['MA_50'] = df['Close'].rolling(window=50).mean()
+
+# Plot Closing Price with Moving Averages
+plt.figure(figsize=(12, 6))
+plt.plot(df['Date'], df['Close'], label='Closing Price', color='blue', linewidth=1.5)
+plt.plot(df['Date'], df['MA_10'], label='10-Day MA', color='orange', linestyle='dashed', linewidth=2)
+plt.plot(df['Date'], df['MA_50'], label='50-Day MA', color='green', linestyle='dashed', linewidth=2)
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.title('Stock Closing Price with Moving Averages')
+plt.legend()
+plt.grid(True)
+plt.show()
